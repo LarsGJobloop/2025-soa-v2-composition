@@ -32,8 +32,8 @@ runcmd:
     cd /opt/app
     git pull
 
-    docker compose -f "\${compose_path}" pull
-    docker compose -f "\${compose_path}" up -d --remove-orphans
+    docker compose -f "${compose_path}" pull
+    docker compose -f "${compose_path}" up -d --remove-orphans
     EOF
   # Make script executable
   - chmod +x /usr/local/bin/sync.sh

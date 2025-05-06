@@ -1,3 +1,8 @@
+variable "ssh_public_key" {
+  description = "Public keyes that the server trusts"
+  type        = string
+}
+
 variable "server_type" {
   description = "The server type to use"
   type        = string
