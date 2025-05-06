@@ -13,11 +13,6 @@ variable "location" {
   type        = string
 }
 
-variable "domain_name" {
-  description = "The domain that the server will be hosted under"
-  type        = string
-}
-
 variable "git_source" {
   description = "Git repository to use as source repo"
   type        = string

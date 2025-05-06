@@ -9,7 +9,6 @@ resource "hcloud_server" "server" {
     git_source       = var.git_source
     compose_path     = var.compose_path
     refresh_interval = var.update_interval
-    domain_name      = var.domain_name
     hostname         = "gitops-server"
   })
 

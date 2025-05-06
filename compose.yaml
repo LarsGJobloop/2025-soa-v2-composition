@@ -1,6 +1,9 @@
+name: soa-composition
+
 services:
   ingress:
     image: "docker.io/traefik:v3.3"
+    container_name: ingress
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -14,9 +17,10 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   homepage:
+    container_name: homepage
     image: docker.io/joseluisq/static-web-server:2
     volumes:
-      - ./services/homepage:/public
+      - ./services/Homepage:/public
     labels:
       - "traefik.enable=true"
       # Since we don't actually have a domain name, we can't use subdomain routing
@@ -25,9 +29,10 @@ services:
       - "traefik.http.routers.homepage.priority=1"
       # END PathPrefix specific config
       - "traefik.http.routers.homepage.entrypoints=web"
-      - traefik.http.services.homepage.loadbalancer.server.port=80
+      - "traefik.http.services.homepage.loadbalancer.server.port=80"
 
   user-service:
+    container_name: user-service
     build:
       context: ./services/UserService
       dockerfile: Dockerfile
@@ -41,9 +46,10 @@ services:
       - "traefik.http.middlewares.user-strip.stripPrefix.prefixes=/api/user"
       # END PathPrefix specific config
       - "traefik.http.routers.user.entrypoints=web"
-      - traefik.http.services.user.loadbalancer.server.port=80
+      - "traefik.http.services.user.loadbalancer.server.port=80"
 
   task-tracker:
+    container_name: task-tracker
     build:
       context: ./services/TaskTracker
       dockerfile: Dockerfile
@@ -57,4 +63,4 @@ services:
       - "traefik.http.middlewares.task-strip.stripPrefix.prefixes=/api/tasks"
       # END PathPrefix specific config
       - "traefik.http.routers.task.entrypoints=web"
-      - traefik.http.services.task.loadbalancer.server.port=80
+      - "traefik.http.services.task.loadbalancer.server.port=80"
