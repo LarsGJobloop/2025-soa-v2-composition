@@ -31,6 +31,26 @@ services:
       - "traefik.http.routers.homepage.entrypoints=web"
       - "traefik.http.services.homepage.loadbalancer.server.port=80"
 
+  tic-tac-toe:
+    container_name: tic-tac-toe
+    build:
+      context: ./services/TicTacToe
+      dockerfile: Dockerfile
+      args:
+        BUILD_TIME_BASE_PATH: /games/tic-tac-toe
+    labels:
+      - "traefik.enable=true"
+      # Since we don't actually have a domain name, we can't use subdomain routing
+      # - "traefik.http.routers.tic-tac-toe.rule=Host(`games.localhost`)
+      - "traefik.http.routers.tic-tac-toe.rule=PathPrefix(`/games/tic-tac-toe`)"
+      - "traefik.http.routers.tic-tac-toe.priority=10"
+      # NextJS needs to be aware of the full path to do proper linking and routing
+      # - "traefik.http.routers.tic-tac-toe.middlewares=tic-tac-toe-strip"
+      # - "traefik.http.middlewares.tic-tac-toe-strip.stripPrefix.prefixes=/games/tic-tac-toe"
+      # END PathPrefix specific config
+      - "traefik.http.routers.tic-tac-toe.entrypoints=web"
+      - "traefik.http.services.tic-tac-toe.loadbalancer.server.port=80"
+
   user-service:
     container_name: user-service
     build:

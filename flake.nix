@@ -30,6 +30,7 @@
       devShells = withPkgs (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            nodejs_22 # UI Developement
             dotnetCorePackages.sdk_9_0 # Program Development
             hcloud
             terraform
