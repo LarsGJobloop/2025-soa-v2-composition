@@ -18,6 +18,11 @@ variable "git_source" {
   type        = string
 }
 
+variable "target_branch" {
+  description = "The branch to target for reconciliation"
+  type        = string
+}
+
 variable "compose_path" {
   description = "Path to the compose file inside the repo"
   type        = string

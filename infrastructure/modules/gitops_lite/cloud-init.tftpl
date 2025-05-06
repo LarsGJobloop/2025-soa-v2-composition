@@ -32,7 +32,7 @@ runcmd:
     cd /opt/app
     # Overwrite local changes with the remote
     git fetch origin
-    git reset --hard origin/main
+    git reset --hard origin/${target_branch}
 
     docker compose -f "${compose_path}" pull
     docker compose -f "${compose_path}" up -d --remove-orphans --force-recreate
