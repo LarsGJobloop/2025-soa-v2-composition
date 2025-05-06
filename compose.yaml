@@ -1,0 +1,14 @@
+services:
+  user-service:
+    build:
+      context: ./services/UserService
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8080
+
+  task-tracker:
+    build:
+      context: ./services/TaskTracker
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8080
