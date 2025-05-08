@@ -8,7 +8,7 @@ module "gitops_lite" {
   git_source      = "https://github.com/LarsGJobloop/2025-soa-v2-composition"
   target_branch   = "main"
   compose_path    = "./compose.yaml"
-  update_interval = "*/30 * * * *"
+  update_interval = "*/1 * * * *"
 }
 
 output "ipv4_address" {
