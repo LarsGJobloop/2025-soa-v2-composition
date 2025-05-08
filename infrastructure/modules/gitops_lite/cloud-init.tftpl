@@ -35,7 +35,7 @@ runcmd:
     git reset --hard origin/${target_branch}
 
     docker compose -f "${compose_path}" pull
-    docker compose -f "${compose_path}" up -d --remove-orphans --force-recreate
+    docker compose -f "${compose_path}" up -d --build --remove-orphans --force-recreate
     EOF
   # Make script executable
   - chmod +x /usr/local/bin/sync.sh
